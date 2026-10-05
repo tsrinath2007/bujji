@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bujji — Teach it. It grows.</title>
+  <link rel="icon" type="image/png" href="bujji_logo.png" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-cream: #FFFDF7;
+      --bg-card: #FFFFFF;
+      --primary-blue: #2563EB;
+      --primary-hover: #1D4ED8;
+      --accent-green: #10B981;
+      --accent-amber: #F59E0B;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 20px 40px -15px rgba(37, 99, 235, 0.15);
+      --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    header {
+      padding: 24px 0;
+      background: rgba(255, 253, 247, 0.9);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn-secondary {
+      color: var(--text-dark);
+      background: rgba(15, 23, 42, 0.05);
+    }
+    .nav-btn-secondary:hover {
+      background: rgba(15, 23, 42, 0.1);
+    }
+
+    .nav-btn-primary {
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    }
+    .nav-btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 70px 0 60px;
+      text-align: center;
+      position: relative;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--primary-blue);
+      border-radius: 9999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      border: 1px solid rgba(37, 99, 235, 0.15);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      color: var(--text-dark);
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--primary-blue), #3B82F6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 36px;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .download-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      padding: 18px 40px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .download-cta:hover {
+      background: var(--primary-hover);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.3);
+    }
+
+    .download-cta svg {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .apk-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .apk-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Mascot Hero Visual */
+    .mascot-container {
+      position: relative;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .mascot-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(255, 253, 247, 0) 70%);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .mascot-img {
+      position: relative;
+      z-index: 2;
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 30px rgba(15, 23, 42, 0.12));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(1.5deg); }
+    }
+
+    /* Features Grid */
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 32px 28px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.08);
+      border-color: #CBD5E1;
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+
+    .icon-blue { background: rgba(37, 99, 235, 0.1); color: var(--primary-blue); }
+    .icon-green { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
+    .icon-amber { background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); }
+    .icon-purple { background: rgba(139, 92, 246, 0.1); color: #8B5CF6; }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Install Steps */
+    .install-section {
+      background: #FFFFFF;
+      border-radius: 28px;
+      padding: 48px 40px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 80px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+      margin-top: 36px;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .step-item h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .step-item p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .footer-links a {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .install-section {
+        padding: 32px 20px;
+      }
+      .download-cta {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <img src="bujji_logo.png" alt="Bujji Mascot Logo" />
+        <span>Bujji</span>
+      </a>
+      <div class="nav-links">
+        <a href="https://github.com/tsrinath2007/bujji" target="_blank" class="nav-btn nav-btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="bujji.apk" download class="nav-btn nav-btn-primary">
+          Download APK
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        v1.0.0 Ready for Android
+      </div>
+      <h1 class="hero-title">
+        Teach it. <span>It grows.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Bujji turns learning upside-down using the Feynman Technique. Instead of passive cramming, you teach concepts to Bujji — diagnosing knowledge gaps in real-time with an evolving companion.
+      </p>
+
+      <div class="hero-actions">
+        <a href="bujji.apk" download class="download-cta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Bujji APK
+        </a>
+
+        <div class="apk-meta">
+          <span>📦 Size: ~44.5 MB</span>
+          <span>•</span>
+          <span>🤖 Android 8.0+ (Oreo or later)</span>
+          <span>•</span>
+          <span>🔒 Free & Verified</span>
+        </div>
+      </div>
+
+      <div class="mascot-container">
+        <div class="mascot-glow"></div>
+        <img src="bujji_logo.png" alt="Bujji Creature" class="mascot-img" />
+      </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section>
+      <h2 class="section-title">Why Bujji is Different</h2>
+      <p class="section-subtitle">A modern learning experience built from the ground up for deep comprehension and active recall.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">🧠</div>
+          <h3>Feynman Technique Engine</h3>
+          <p>You cannot truly understand something until you can teach it simply. Bujji listens to your spoken explanations and detects missing mental connections.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-green">🌱</div>
+          <h3>Evolving Creature Companion</h3>
+          <p>Watch Bujji evolve as you gain Mastery XP. Every completed concept powers your companion's growth with responsive, playful interactions.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-amber">🕸️</div>
+          <h3>Interactive Brain Map</h3>
+          <p>Visualize your entire syllabus as an interconnected knowledge graph. Instantly pinpoint foundational prerequisites and targeted revision gaps.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-purple">⚡</div>
+          <h3>Offline-First & Fast</h3>
+          <p>Powered by local Room database architecture with seamless cloud synchronization via Supabase. Study anywhere, anytime without interruption.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3-Step Install Guide -->
+    <section class="install-section">
+      <h2 style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em;">How to Install on Android</h2>
+      <p style="color: var(--text-muted); font-size: 0.98rem;">Getting started takes under 30 seconds:</p>
+
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <h4>Download the APK</h4>
+          <p>Tap the <strong>Download Bujji APK</strong> button above to download <code>bujji.apk</code> onto your Android device.</p>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <h4>Allow Install</h4>
+          <p>Open the downloaded file. When prompted by Android, tap <em>Settings</em> and toggle <em>Allow from this source</em> (or install anyway).</p>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <h4>Sign in & Teach</h4>
+          <p>Launch Bujji, sign in effortlessly with your Google account, and start teaching your first concept!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-brand">
+        <img src="bujji_logo.png" alt="Bujji Logo" style="width: 24px; height: 24px; border-radius: 6px;" />
+        Bujji — AI Active Recall Learning Companion
+      </div>
+      <p>© 2026 Bujji Project. Built with Jetpack Compose & Supabase.</p>
+      <div class="footer-links">
+        <a href="https://github.com/tsrinath2007/bujji" target="_blank">GitHub Repository</a>
+        <a href="bujji.apk" download>Direct APK Download</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
