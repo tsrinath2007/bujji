@@ -1175,6 +1175,9 @@
       const planToRecord = activePlan || "Undecided";
       const priceToRecord = activePrice || "Undecided";
 
+      let supabaseSuccess = false;
+      let supabaseErrorMsg = null;
+
       // 1. Post to Supabase
       if (supabaseClient) {
         try {
@@ -1191,11 +1194,21 @@
               }
             ]);
 
-          if (error && error.code !== "23505") {
-            console.warn("Supabase record note:", error.message);
+          if (error) {
+            console.error("Supabase Error:", error);
+            if (error.code === "PGRST205" || error.message.includes("not find the table")) {
+              supabaseErrorMsg = "Waitlist table not found in Supabase. Please run the SQL migration script in your Supabase SQL editor!";
+            } else if (error.code === "23505") {
+              supabaseSuccess = true; // Already registered
+            } else {
+              supabaseErrorMsg = error.message;
+            }
+          } else {
+            supabaseSuccess = true;
           }
         } catch (err) {
-          console.warn("Supabase connection note:", err);
+          console.error("Supabase Exception:", err);
+          supabaseErrorMsg = err.message;
         }
       }
 
@@ -1216,9 +1229,15 @@
         }
       } catch (e) {}
 
-      // UI Success Feedback
+      // UI Success or Warning Feedback
       const planDetail = activePlan ? ` (${activePlan} at ${activePrice})` : "";
-      showStatus(`🎉 Welcome aboard, ${fullName || email}! You're registered for the priority waitlist${planDetail}.`);
+      if (supabaseSuccess) {
+        showStatus(`🎉 Welcome aboard, ${fullName || email}! You're registered in Supabase${planDetail}.`);
+      } else if (supabaseErrorMsg) {
+        showStatus(`⚠️ Saved locally, but Supabase error: "${supabaseErrorMsg}"`, false);
+      } else {
+        showStatus(`🎉 Registered locally! (Run the SQL script in Supabase to sync to the cloud database).`);
+      }
       const input = document.getElementById("emailInput");
       if (input) input.value = "";
     }
