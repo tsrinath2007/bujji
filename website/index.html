@@ -37,6 +37,10 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg-cream);
@@ -46,7 +50,6 @@
       overflow-x: hidden;
     }
 
-    /* Container */
     .container {
       max-width: 1120px;
       margin: 0 auto;
@@ -55,8 +58,8 @@
 
     /* Navbar */
     header {
-      padding: 20px 0;
-      background: rgba(255, 253, 249, 0.92);
+      padding: 18px 0;
+      background: rgba(255, 253, 249, 0.94);
       backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
@@ -95,15 +98,26 @@
       gap: 16px;
     }
 
+    .nav-anchor {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-anchor:hover {
+      color: var(--primary-blue);
+    }
+
     .x-follow-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 9px 18px;
+      padding: 8px 16px;
       background: #000000;
       color: #FFFFFF;
       border-radius: 9999px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 700;
       text-decoration: none;
       transition: all 0.2s ease;
@@ -113,18 +127,17 @@
     .x-follow-btn:hover {
       background: #1e1e1e;
       transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.22);
     }
 
     .x-follow-btn svg {
-      width: 16px;
-      height: 16px;
+      width: 15px;
+      height: 15px;
       fill: currentColor;
     }
 
     /* Hero Section */
     .hero {
-      padding: 70px 0 50px;
+      padding: 60px 0 50px;
       text-align: center;
       position: relative;
     }
@@ -139,7 +152,7 @@
       border-radius: 9999px;
       font-size: 0.88rem;
       font-weight: 700;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       border: 1px solid rgba(37, 99, 235, 0.18);
     }
 
@@ -162,7 +175,7 @@
       font-weight: 900;
       line-height: 1.12;
       letter-spacing: -0.035em;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       color: var(--text-dark);
     }
 
@@ -203,49 +216,41 @@
     .waitlist-box p.desc {
       font-size: 0.95rem;
       color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
-    /* Google Sign-in Button Wrapper */
-    .google-btn-wrapper {
-      display: flex;
-      justify-content: center;
       margin-bottom: 20px;
     }
 
-    .custom-google-btn {
-      display: inline-flex;
+    /* Selected Plan Pill in Waitlist */
+    .selected-plan-banner {
+      background: #EFF6FF;
+      border: 1px dashed var(--primary-blue);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary-blue);
+      margin-bottom: 18px;
+      display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      padding: 14px 20px;
-      background: #FFFFFF;
-      border: 1.5px solid #CBD5E1;
-      border-radius: 14px;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #1E293B;
+      justify-content: space-between;
+    }
+
+    .selected-plan-banner a {
+      color: var(--primary-blue);
+      text-decoration: underline;
+      font-size: 0.82rem;
       cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow-sm);
     }
 
-    .custom-google-btn:hover {
-      background: #F8FAFC;
-      border-color: #94A3B8;
-      transform: translateY(-1px);
-    }
-
-    .custom-google-btn svg {
-      width: 22px;
-      height: 22px;
+    .google-btn-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
     }
 
     .divider {
       display: flex;
       align-items: center;
-      margin: 18px 0;
+      margin: 16px 0;
       color: #94A3B8;
       font-size: 0.85rem;
       font-weight: 600;
@@ -264,7 +269,6 @@
       padding: 0 12px;
     }
 
-    /* Email Input Form */
     .email-form {
       display: flex;
       gap: 10px;
@@ -312,7 +316,6 @@
       cursor: not-allowed;
     }
 
-    /* Feedback message */
     .status-msg {
       margin-top: 14px;
       font-size: 0.92rem;
@@ -350,8 +353,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 320px;
-      height: 320px;
+      width: 300px;
+      height: 300px;
       background: radial-gradient(circle, rgba(37, 99, 235, 0.14) 0%, rgba(255, 253, 249, 0) 70%);
       border-radius: 50%;
       z-index: 1;
@@ -360,8 +363,8 @@
     .mascot-img {
       position: relative;
       z-index: 2;
-      width: 210px;
-      height: 210px;
+      width: 200px;
+      height: 200px;
       object-fit: contain;
       filter: drop-shadow(0 20px 30px rgba(11, 17, 32, 0.12));
       animation: float 4s ease-in-out infinite;
@@ -372,11 +375,211 @@
       50% { transform: translateY(-10px) rotate(1.5deg); }
     }
 
+    /* Pricing Survey Section */
+    .pricing-section {
+      padding: 60px 0 80px;
+    }
+
+    .survey-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #FEF3C7;
+      color: #B45309;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .dev-note-box {
+      max-width: 720px;
+      margin: 0 auto 36px;
+      background: #FFFBEB;
+      border: 1.5px solid #FDE68A;
+      border-radius: 18px;
+      padding: 18px 24px;
+      text-align: center;
+      color: #92400E;
+      font-size: 0.98rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dev-note-box p span {
+      font-weight: 800;
+      color: #78350F;
+    }
+
+    .pricing-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 32px 26px;
+      border: 1.5px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px -6px rgba(11, 17, 32, 0.1);
+      border-color: #93C5FD;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--primary-blue);
+      box-shadow: 0 14px 34px -8px rgba(37, 99, 235, 0.2);
+    }
+
+    .card-top-tag {
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .plan-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .plan-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .price-selection-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .price-pill-btn {
+      flex: 1;
+      min-width: 65px;
+      padding: 10px 8px;
+      border-radius: 12px;
+      border: 1.5px solid #CBD5E1;
+      background: #F8FAFC;
+      color: var(--text-dark);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.98rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.18s ease;
+    }
+
+    .price-pill-btn:hover {
+      border-color: var(--primary-blue);
+      background: #EFF6FF;
+      color: var(--primary-blue);
+    }
+
+    .price-pill-btn.active {
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      border-color: var(--primary-blue);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .plan-features-list {
+      list-style: none;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: var(--text-dark);
+    }
+
+    .plan-features-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .plan-features-list li span {
+      color: var(--accent-green);
+      font-weight: 900;
+    }
+
+    .choose-plan-btn {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-choose-primary {
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+    }
+    .btn-choose-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-choose-outline {
+      background: #F8FAFC;
+      color: var(--text-dark);
+      border: 1.5px solid var(--border-color);
+    }
+    .btn-choose-outline:hover {
+      background: #F1F5F9;
+      border-color: #94A3B8;
+    }
+
     /* Founder Section */
     .founder-card {
       background: linear-gradient(135deg, #0B1120 0%, #1E293B 100%);
       border-radius: 28px;
-      padding: 40px 32px;
+      padding: 44px 32px;
       color: #FFFFFF;
       display: flex;
       flex-direction: column;
@@ -548,6 +751,9 @@
       .submit-btn {
         width: 100%;
       }
+      .pricing-cards-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -561,6 +767,7 @@
         <span>Bujji</span>
       </a>
       <div class="nav-links">
+        <a href="#pricing-survey" class="nav-anchor">Pricing Survey</a>
         <a href="https://x.com/sesbuilds" target="_blank" class="x-follow-btn">
           <svg viewBox="0 0 24 24">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -586,9 +793,15 @@
       </p>
 
       <!-- Waitlist Box -->
-      <div class="waitlist-box">
+      <div class="waitlist-box" id="waitlist-section">
         <h3>Join the Early Access Waitlist</h3>
         <p class="desc">Be first in line when we launch public access. No spam, ever.</p>
+
+        <!-- Selected Plan Banner (updates when user selects a pricing plan below) -->
+        <div id="selectedPlanBanner" class="selected-plan-banner" style="display: none;">
+          <span id="selectedPlanText">🎯 Preferred Plan: <strong>1 Month (₹80)</strong></span>
+          <a onclick="clearSelectedPlan()">Change</a>
+        </div>
 
         <!-- Google One Tap / Sign In Button Container -->
         <div id="g_id_onload"
@@ -638,6 +851,119 @@
       <div class="mascot-container">
         <div class="mascot-glow"></div>
         <img src="bujji_logo.png" alt="Bujji Mascot" class="mascot-img" />
+      </div>
+    </section>
+
+    <!-- Subscription & Pricing Survey Section -->
+    <section class="pricing-section" id="pricing-survey">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span class="survey-badge">💡 Transparent Pricing Survey</span>
+        <h2 class="section-title">Help Us Price Bujji Fairly</h2>
+        <p class="section-subtitle">
+          We want Bujji to be accessible to every student while sustaining continuous AI model training and server costs. Vote for what you'd be happy to pay!
+        </p>
+      </div>
+
+      <!-- Developer Note Callout -->
+      <div class="dev-note-box">
+        <p>
+          ☕ <span>Devs also need to live! Please, this is a survey to help us build sustainably.</span> Pick the price you'd gladly support us with, and your vote will be attached directly to your waitlist spot!
+        </p>
+      </div>
+
+      <!-- Plan Cards Grid -->
+      <div class="pricing-cards-grid">
+        
+        <!-- 1 Month Plan -->
+        <div class="pricing-card" id="card-1month">
+          <div>
+            <div class="plan-title">1 Month</div>
+            <div class="plan-desc">For sprint preparation & exam crunch seasons.</div>
+
+            <div class="price-selection-label">
+              <span>What would you pay?</span>
+              <span style="color: var(--primary-blue); font-weight: 800;">₹ / month</span>
+            </div>
+
+            <div class="price-pills">
+              <button type="button" class="price-pill-btn" onclick="selectPrice('1 Month', '₹70', this)">₹70</button>
+              <button type="button" class="price-pill-btn active" onclick="selectPrice('1 Month', '₹80', this)">₹80</button>
+              <button type="button" class="price-pill-btn" onclick="selectPrice('1 Month', '₹90', this)">₹90</button>
+            </div>
+
+            <ul class="plan-features-list">
+              <li><span>✓</span> Unlimited Feynman Voice Sessions</li>
+              <li><span>✓</span> Dynamic Concept Knowledge Graph</li>
+              <li><span>✓</span> Real-Time Misconception Diagnosis</li>
+            </ul>
+          </div>
+
+          <button class="choose-plan-btn btn-choose-outline" onclick="applyPlanAndScroll('1 Month')">
+            Select 1 Month & Join Waitlist →
+          </button>
+        </div>
+
+        <!-- 6 Months Plan (Featured) -->
+        <div class="pricing-card featured" id="card-6months">
+          <div class="card-top-tag">Most Popular</div>
+          <div>
+            <div class="plan-title">6 Months</div>
+            <div class="plan-desc">Full academic semester mastery & retention.</div>
+
+            <div class="price-selection-label">
+              <span>What would you pay?</span>
+              <span style="color: var(--primary-blue); font-weight: 800;">₹ / 6 months</span>
+            </div>
+
+            <div class="price-pills">
+              <button type="button" class="price-pill-btn" onclick="selectPrice('6 Months', '₹300', this)">₹300</button>
+              <button type="button" class="price-pill-btn active" onclick="selectPrice('6 Months', '₹400', this)">₹400</button>
+              <button type="button" class="price-pill-btn" onclick="selectPrice('6 Months', '₹500', this)">₹500</button>
+            </div>
+
+            <ul class="plan-features-list">
+              <li><span>✓</span> Everything in 1 Month plan</li>
+              <li><span>✓</span> Evolving Companion Personalities</li>
+              <li><span>✓</span> Spaced Revision Timelines</li>
+              <li><span>✓</span> Priority Beta Feature Access</li>
+            </ul>
+          </div>
+
+          <button class="choose-plan-btn btn-choose-primary" onclick="applyPlanAndScroll('6 Months')">
+            Select 6 Months & Join Waitlist →
+          </button>
+        </div>
+
+        <!-- 1 Year Plan -->
+        <div class="pricing-card" id="card-1year">
+          <div>
+            <div class="plan-title">1 Year</div>
+            <div class="plan-desc">Long-term academic deep work & compounding mastery.</div>
+
+            <div class="price-selection-label">
+              <span>What would you pay?</span>
+              <span style="color: var(--primary-blue); font-weight: 800;">₹ / year</span>
+            </div>
+
+            <div class="price-pills">
+              <button type="button" class="price-pill-btn" onclick="selectPrice('1 Year', '₹700', this)">₹700</button>
+              <button type="button" class="price-pill-btn active" onclick="selectPrice('1 Year', '₹800', this)">₹800</button>
+              <button type="button" class="price-pill-btn" onclick="selectPrice('1 Year', '₹900', this)">₹900</button>
+              <button type="button" class="price-pill-btn" onclick="selectPrice('1 Year', '₹1000', this)">₹1000</button>
+            </div>
+
+            <ul class="plan-features-list">
+              <li><span>✓</span> Everything in 6 Months plan</li>
+              <li><span>✓</span> Lifetime Founder Supporter Badge</li>
+              <li><span>✓</span> Direct 1-on-1 Feedback Calls with Devs</li>
+            </ul>
+          </div>
+
+          <button class="choose-plan-btn btn-choose-outline" onclick="applyPlanAndScroll('1 Year')">
+            Select 1 Year & Join Waitlist →
+          </button>
+        </div>
+
       </div>
     </section>
 
@@ -699,6 +1025,7 @@
       <p>© 2026 Bujji. All rights reserved.</p>
       <div class="footer-links">
         <a href="https://x.com/sesbuilds" target="_blank">Follow @sesbuilds</a>
+        <a href="#pricing-survey">Pricing Survey</a>
         <a href="https://github.com/tsrinath2007/bujji" target="_blank">GitHub</a>
       </div>
     </div>
@@ -716,7 +1043,78 @@
         supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       }
     } catch (e) {
-      console.warn("Supabase initialization fallback:", e);
+      console.warn("Supabase init note:", e);
+    }
+
+    // Survey State
+    const currentPreferences = {
+      "1 Month": "₹80",
+      "6 Months": "₹400",
+      "1 Year": "₹800"
+    };
+    let activePlan = null;
+    let activePrice = null;
+
+    // Check URL parameters for direct plan links: e.g. ?plan=1month&price=80
+    window.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const planParam = params.get("plan");
+      const priceParam = params.get("price");
+
+      if (planParam) {
+        let mappedPlan = "1 Month";
+        if (planParam.toLowerCase().includes("6")) mappedPlan = "6 Months";
+        else if (planParam.toLowerCase().includes("year")) mappedPlan = "1 Year";
+
+        const mappedPrice = priceParam ? (priceParam.startsWith("₹") ? priceParam : `₹${priceParam}`) : currentPreferences[mappedPlan];
+        setChosenPlan(mappedPlan, mappedPrice);
+      }
+    });
+
+    function selectPrice(planName, price, btn) {
+      currentPreferences[planName] = price;
+      // Update UI pills in that card
+      const parent = btn.closest(".price-pills");
+      parent.querySelectorAll(".price-pill-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      if (activePlan === planName) {
+        setChosenPlan(planName, price);
+      }
+    }
+
+    function applyPlanAndScroll(planName) {
+      const price = currentPreferences[planName];
+      setChosenPlan(planName, price);
+
+      // Scroll smoothly to the waitlist box
+      const target = document.getElementById("waitlist-section");
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        // Focus email input after scroll
+        setTimeout(() => {
+          const emailInput = document.getElementById("emailInput");
+          if (emailInput) emailInput.focus();
+        }, 500);
+      }
+    }
+
+    function setChosenPlan(plan, price) {
+      activePlan = plan;
+      activePrice = price;
+      const banner = document.getElementById("selectedPlanBanner");
+      const text = document.getElementById("selectedPlanText");
+      if (banner && text) {
+        text.innerHTML = `🎯 Preferred Plan: <strong>${plan} (${price})</strong>`;
+        banner.style.display = "flex";
+      }
+    }
+
+    function clearSelectedPlan() {
+      activePlan = null;
+      activePrice = null;
+      const banner = document.getElementById("selectedPlanBanner");
+      if (banner) banner.style.display = "none";
     }
 
     function showStatus(message, isSuccess = true) {
@@ -774,7 +1172,10 @@
 
     // Shared Save Function
     async function saveToWaitlist(email, fullName, avatarUrl, provider) {
-      // 1. Try Supabase
+      const planToRecord = activePlan || "Undecided";
+      const priceToRecord = activePrice || "Undecided";
+
+      // 1. Post to Supabase
       if (supabaseClient) {
         try {
           const { data, error } = await supabaseClient
@@ -784,29 +1185,40 @@
                 email: email, 
                 full_name: fullName, 
                 avatar_url: avatarUrl, 
-                provider: provider 
+                provider: provider,
+                preferred_plan: planToRecord,
+                preferred_price: priceToRecord
               }
             ]);
 
-          if (error && error.code !== "23505") { // Ignore unique constraint duplicate
-            console.warn("Supabase insert note:", error.message);
+          if (error && error.code !== "23505") {
+            console.warn("Supabase record note:", error.message);
           }
         } catch (err) {
-          console.warn("Supabase network note:", err);
+          console.warn("Supabase connection note:", err);
         }
       }
 
-      // 2. Save locally in localStorage as reliable fallback
+      // 2. Save in localStorage fallback
       try {
         let stored = JSON.parse(localStorage.getItem("bujji_waitlist") || "[]");
         if (!stored.some(u => u.email === email)) {
-          stored.push({ email, fullName, avatarUrl, provider, date: new Date().toISOString() });
+          stored.push({ 
+            email, 
+            fullName, 
+            avatarUrl, 
+            provider, 
+            preferred_plan: planToRecord,
+            preferred_price: priceToRecord,
+            date: new Date().toISOString() 
+          });
           localStorage.setItem("bujji_waitlist", JSON.stringify(stored));
         }
       } catch (e) {}
 
       // UI Success Feedback
-      showStatus(`🎉 Welcome aboard, ${fullName || email}! You're on the priority waitlist.`);
+      const planDetail = activePlan ? ` (${activePlan} at ${activePrice})` : "";
+      showStatus(`🎉 Welcome aboard, ${fullName || email}! You're registered for the priority waitlist${planDetail}.`);
       const input = document.getElementById("emailInput");
       if (input) input.value = "";
     }
