@@ -241,6 +241,58 @@
       cursor: pointer;
     }
 
+    /* Platform Selector Pills */
+    .platform-selector-box {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .platform-label {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .platform-pills {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .platform-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1.5px solid #CBD5E1;
+      background: #F8FAFC;
+      color: var(--text-dark);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .platform-btn:hover {
+      border-color: var(--primary-blue);
+      background: #EFF6FF;
+      color: var(--primary-blue);
+    }
+
+    .platform-btn.active {
+      background: var(--primary-blue);
+      color: #FFFFFF;
+      border-color: var(--primary-blue);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
     .google-btn-wrapper {
       display: flex;
       justify-content: center;
@@ -810,6 +862,24 @@
              data-auto_prompt="false">
         </div>
 
+        <!-- Platform Selector (iOS / Android / Both) -->
+        <div class="platform-selector-box">
+          <div class="platform-label">
+            <span>📱 Which device will you use Bujji on?</span>
+          </div>
+          <div class="platform-pills">
+            <button type="button" class="platform-btn" onclick="selectPlatform('iOS', this)">
+              🍏 iOS
+            </button>
+            <button type="button" class="platform-btn" onclick="selectPlatform('Android', this)">
+              🤖 Android
+            </button>
+            <button type="button" class="platform-btn active" onclick="selectPlatform('Both', this)">
+              ✨ Both
+            </button>
+          </div>
+        </div>
+
         <div class="google-btn-wrapper">
           <div class="g_id_signin" 
                data-type="standard" 
@@ -1046,7 +1116,8 @@
       console.warn("Supabase init note:", e);
     }
 
-    // Survey State
+    // Survey & Platform State
+    let activePlatform = "Both";
     const currentPreferences = {
       "1 Month": "₹80",
       "6 Months": "₹400",
@@ -1055,11 +1126,26 @@
     let activePlan = null;
     let activePrice = null;
 
+    function selectPlatform(platform, btn) {
+      activePlatform = platform;
+      const parent = btn.closest(".platform-pills");
+      parent.querySelectorAll(".platform-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
     // Check URL parameters for direct plan links: e.g. ?plan=1month&price=80
     window.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
       const planParam = params.get("plan");
       const priceParam = params.get("price");
+      const platformParam = params.get("platform");
+
+      if (platformParam) {
+        const foundBtn = Array.from(document.querySelectorAll(".platform-btn")).find(b => 
+          b.textContent.toLowerCase().includes(platformParam.toLowerCase())
+        );
+        if (foundBtn) selectPlatform(platformParam, foundBtn);
+      }
 
       if (planParam) {
         let mappedPlan = "1 Month";
@@ -1189,6 +1275,7 @@
                 full_name: fullName, 
                 avatar_url: avatarUrl, 
                 provider: provider,
+                platform: activePlatform,
                 preferred_plan: planToRecord,
                 preferred_price: priceToRecord
               }
@@ -1221,6 +1308,7 @@
             fullName, 
             avatarUrl, 
             provider, 
+            platform: activePlatform,
             preferred_plan: planToRecord,
             preferred_price: priceToRecord,
             date: new Date().toISOString() 
@@ -1232,11 +1320,11 @@
       // UI Success or Warning Feedback
       const planDetail = activePlan ? ` (${activePlan} at ${activePrice})` : "";
       if (supabaseSuccess) {
-        showStatus(`🎉 Welcome aboard, ${fullName || email}! You're registered in Supabase${planDetail}.`);
+        showStatus(`🎉 Welcome aboard, ${fullName || email}! You're registered for ${activePlatform} in Supabase${planDetail}.`);
       } else if (supabaseErrorMsg) {
-        showStatus(`⚠️ Saved locally, but Supabase error: "${supabaseErrorMsg}"`, false);
+        showStatus(`⚠️ Saved locally for ${activePlatform}, but Supabase error: "${supabaseErrorMsg}"`, false);
       } else {
-        showStatus(`🎉 Registered locally! (Run the SQL script in Supabase to sync to the cloud database).`);
+        showStatus(`🎉 Registered for ${activePlatform} locally! (Run the SQL script in Supabase to sync to the cloud database).`);
       }
       const input = document.getElementById("emailInput");
       if (input) input.value = "";

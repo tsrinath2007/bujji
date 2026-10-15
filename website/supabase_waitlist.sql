@@ -1,5 +1,5 @@
 -- Run this in your Supabase SQL Editor:
--- https://supabase.com/dashboard/project/_/sql
+-- https://supabase.com/dashboard/project/mgdiksdtwgiegoqnpbzy/sql
 
 CREATE TABLE IF NOT EXISTS public.waitlist (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -7,12 +7,14 @@ CREATE TABLE IF NOT EXISTS public.waitlist (
     full_name TEXT,
     avatar_url TEXT,
     provider TEXT DEFAULT 'email',
+    platform TEXT DEFAULT 'both',
     preferred_plan TEXT,
     preferred_price TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- If table already exists, add columns safely:
+ALTER TABLE public.waitlist ADD COLUMN IF NOT EXISTS platform TEXT DEFAULT 'both';
 ALTER TABLE public.waitlist ADD COLUMN IF NOT EXISTS preferred_plan TEXT;
 ALTER TABLE public.waitlist ADD COLUMN IF NOT EXISTS preferred_price TEXT;
 
