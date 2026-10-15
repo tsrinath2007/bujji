@@ -1,40 +1,37 @@
-# Pupil - Fully On-Device Study Companion (Android)
+# Bujji — AI Active Recall Study Companion (Android)
 
-> **Target Device**: iQOO 15 (Snapdragon 8 Elite) / Android 14+ (API 29+)  
-> **Architecture**: 100% Offline, Zero Cloud APIs, Airplane-Mode Capable, Single-Activity MVVM + Jetpack Compose + Material 3.
+> **Creator**: [@sesbuilds](https://x.com/sesbuilds)  
+> **Platform**: Android 10+ (API 29+)  
+> **Architecture**: Single-Activity MVVM + Jetpack Compose + Material 3 + Supabase Cloud + Google Identity.
 
 ---
 
 ## 1. Overview & Concept
-Pupil is an on-device study companion where the student studies material and then **teaches** a responsive, animated creature by voice or text. 
-An on-device quantized LLM (MediaPipe GenAI Inference running locally on GPU/NPU) judges whether the student understood each concept by evaluating analogies, intuition, and examples—not just matching keywords. Evidence strictly quotes the student's actual words.
+Bujji is an intelligent study companion where students study material and **teach** a responsive, animated creature by voice or text using the Feynman Technique. 
 
-- **Obsidian-Style Vault**: Every concept generates a clean Markdown note in `/vault` (e.g. `Osmosis.md`) complete with YAML frontmatter, WikiLinks (`[[Diffusion]]`), last taught timestamps, student explanations, and grading follow-ups. Includes a 1-tap zip exporter.
-- **Dynamic Knowledge Graph**: Visualized with Canvas with pinch-zoom, pan, and live status coloring (Mastered, Due for Revision, Partial, Gap). Positions are cached for instantaneous return at 60fps.
-- **Creature Evolution**: A procedural Compose creature with 5 states (*Sleeping, Waiting, Confused, Happy, Evolving*), 3 evolution stages (*Sprout, Lumina, Auron*), level progression, and a gentle welcome-back streak.
-- **Spaced Revision**: Automatic review schedules (7, 14, 30 days) with in-app time-travel simulation tools for testing.
-- **100% Offline Guarantee**: The APK does not request `android.permission.INTERNET`. An offline proof screen inspects package permissions at runtime.
+- **Feynman Technique Engine**: Bujji evaluates students' spoken and written explanations, diagnosing mental gaps and analogies rather than simple keyword memorization.
+- **Dynamic Knowledge Graph**: Visualized with Canvas with pinch-zoom, pan, and live mastery tracking.
+- **Creature Evolution**: A procedural companion with responsive animations, mood states, XP leveling, and daily streaks.
+- **Supabase Cloud Sync**: Effortless cloud sync for profiles, XP, and mastered topics.
 
 ---
 
 ## 2. Hardware & System Requirements
-- **SoC**: Qualcomm Snapdragon 8 Elite (or Snapdragon 8 Gen 2/3 / Dimensity 9300+)
-- **Target Device**: iQOO 15
 - **OS**: Android 10 (API 29) to Android 15 (Target SDK 35)
-- **RAM**: Minimum 8 GB (12 GB+ recommended for GPU-accelerated LLM weights)
-- **Storage**: ~2.5 GB free storage for model weights, cache, and markdown vault
+- **RAM**: Minimum 6 GB (8 GB+ recommended)
+- **Storage**: ~200 MB free storage
 
 ---
 
-## 3. How to Install the APK
+## 3. Quickstart & Development
 
 ### Via Gradle & ADB (Recommended)
-1. Connect your iQOO 15 via USB and enable **USB Debugging** in Developer Options.
+1. Connect your Android device via USB and enable **USB Debugging** in Developer Options.
 2. Verify device connection:
    ```bash
    adb devices
    ```
-3. Build and install directly to the device:
+3. Build and run:
    ```powershell
    .\gradlew.bat installDebug
    ```
