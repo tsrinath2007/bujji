@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://heybujji.vercel.app/sitemap.xml
